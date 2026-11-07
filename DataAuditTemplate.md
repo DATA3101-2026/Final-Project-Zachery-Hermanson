@@ -1,20 +1,17 @@
-# Data Audit & Overview Template
-Your name here
-2026-10-28
+# OpenPowerLifting Weight to Strength Correlation Audit
+Zachery James Hermanson
+2026-11-07
 
 - [1: Project Overview](#1-project-overview)
 - [2: Data Sources](#2-data-sources)
   - [2.1 Summary of sources](#21-summary-of-sources)
-  - [2.2.1: \[name 1\]](#221-name-1)
-  - [2.2.2 \[name 2\]](#222-name-2)
+  - [2.2.1: Data Set Information & Fair
+    Use](#221-data-set-information--fair-use)
   - [2.3: Investigated and rejected
     sources](#23-investigated-and-rejected-sources)
   - [2.4: What I could not find](#24-what-i-could-not-find)
 - [3: Licensing and permissions](#3-licensing-and-permissions)
   - [3.1: Licence by source](#31-licence-by-source)
-  - [3.2: Unresolved licensing \[If you were able to find all licencing,
-    delete
-    this\]](#32-unresolved-licensing-if-you-were-able-to-find-all-licencing-delete-this)
   - [3.3: Downstream permissions](#33-downstream-permissions)
 - [4: Consent and identifiability](#4-consent-and-identifiability)
 - [5: Exclusions and harms](#5-exclusions-and-harms)
@@ -36,91 +33,151 @@ Your name here
 
 # 1: Project Overview
 
-\[Two or three sentences. What community, what question, what you are
-building. Assume your reader has not seen your proposal.\]
+This project acts as window into the relationship between a
+powerlifter’s bodyweight and their overall strength. Will a
+powerlifter’s bodyweight be directly correlated with compound lifts
+(squat + deadlift + benchpress)? This project will focus on cleaning the
+data set, seperating genders, identifying age classes, weight classes,
+and graphing the information to see strength standard trends.
 
 ------------------------------------------------------------------------
 
 # 2: Data Sources
 
-<!-- For the section numbers above, remember to update if needed for multiple sources or removing unneeded subsections -->
-
-\[This section everything you went looking for in your data audit. If
-you found sources that you chose not to use for the project itself, put
-them in! That helps me understand all the options you were considering
-as you worked through it\]
-
 ## 2.1 Summary of sources
 
-\[Fill in one row per source you investigated. Include the ones you
-rejected in the `Using?` column. This table is the quick reference your
-reader checks before reading anything else. A clear table will give a
-reader a good idea of what the focus is beyond the overview\]
+| Source | Producer | Format | Coverage | Using |
+|:---|:---|:---|:---|:---|
+| OpenPowerLifting.org | OpenPowerLifting | CSV | Global,- 1964 - Present | Yes |
+| Data Acquisition & Organization | Mount Allison University / Catherine Evans | Lecture | Mount Allison, 2026 | Yes |
 
-| Source          | Producer         | Format  | Coverage         | Using        |
-|:----------------|:-----------------|:--------|:-----------------|:-------------|
-| \[source name\] | \[organization\] | \[CSV\] | \[place, years\] | Yes          |
-| \[source name\] | \[organization\] | \[PDF\] | \[place, years\] | Yes          |
-| \[source name\] | \[organization\] | \[API\] | \[place, years\] | No, see 2.4 |
+## 2.2.1: Data Set Information & Fair Use
 
-## 2.2.1: \[name 1\]
+**Producer and authority.** OpenPowerLifing.org hosts an open-source,
+non-profit collection of power lifting data. It is published as an open
+data-set to standardize global power lifting meet results into a single
+easy-to-use domain.
 
-**Producer and authority.** \[Who made this dataset, under what grant,
-mandate, legal authority, initiative, etc. Ex: If a municipality
-publishes it, which department, and are they required to? If a
-researcher published it, what grant was it under? If it’s an open source
-publication from an organization, do they describe why it is
-published?\]
+**Original Dataset Purpose.** The purpose of OpenPowerLifting.org is to
+preserve power lifting data taken from professional meets and to provide
+a comprehensive archive of athletic accomplishments. It is primarily
+utilized to track rankings and analyze sport trends among athletes.
 
-**Original Dataset Purpose.** \[Why was this collected? The original
-author likely didn’t have the exact same research question as you.\]
+**Collection method.** The values are gathered manually through official
+power lifting organizations using power lifting federation score sheets
+and score-reporting platforms. The data provided is analyzed and
+structured into a CSV file.
 
-**Collection method.** \[How did the values collected get into the file?
-Sensor, survey, administrative by-product, manual entry, something
-nobody can tell you? Remember that no answer found is still and
-answer!\]
+**Coverage and resolution.** This data set is globally covered through
+multiple officially licenced power lifting federations. This data dates
+as far back as 1964 to today through continuous competition results.
 
-**Coverage and resolution.** \[Spatial extent, temporal range, reporting
-frequency, unit of observation.\]
+**Licence.** Creative Commons Zero (CC0 1.0 Universal) Public Domain
+Dedication, allowing unrestricted use, modification, and distribution
+for any purpose.
 
-**Licence.** \[Find the licence declaration and put the shorthand here.
-If you cannot find it, say here and complete section 3.2.\]
+**Access.** Downloaded directly from OpenPowerLifting.org public git.
+Accessed through OpenPowerLifting.org/data.
 
-**Access.** \[How you got it, and whether a future user could get it the
-same way. Include the date you retrieved it if it is from a website, as
-sometimes web portals or search algorithms can change and make your
-first search method difficult to replicate.\]
+**Known problems.** After a brief look through, some values are missing.
+Some figures that are required for my project appear to have a null
+value such as Best3SquatKg, Bench, and Deadlift. Some body weight is
+also missing.
 
-**Known problems.** \[What is wrong with it on a first look-through? Are
-there any missing years, survey answers, changed definitions,
-inconsistent identifiers, or NA values in the dataset?\]
+``` r
+raw_1 <- read_csv("C:/Users/zache/OneDrive/Documents/GitHubRepos/Final-Project/data/raw/openpowerlifting-2026-10-17-c7782562.csv") # example for a csv file
+```
 
-\[One or two sentences on what the output above shows. Feel free to note
-anything new or hard for you to initially understand in the structure,
-types, source, or size.\]
+    Rows: 4050248 Columns: 42
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    chr  (19): Name, Sex, Event, Equipment, AgeClass, BirthYearClass, Division, ...
+    dbl  (22): Age, BodyweightKg, Squat1Kg, Squat2Kg, Squat3Kg, Squat4Kg, Best3S...
+    date  (1): Date
 
-## 2.2.2 \[name 2\]
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
-\[Repeat the full structure above for every source you are using. Copy
-the headings and the loaded source’s descriptive sentences below.\]
+``` r
+glimpse(raw_1) |> select(1:6) 
+```
+
+    Rows: 4,050,248
+    Columns: 42
+    $ Name             <chr> "E.S. Denisenko", "I.S. Lebetskaya", "K. Yakimovich",…
+    $ Sex              <chr> "F", "F", "F", "F", "F", "M", "M", "M", "M", "M", "M"…
+    $ Event            <chr> "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B"…
+    $ Equipment        <chr> "Raw", "Raw", "Raw", "Raw", "Raw", "Raw", "Raw", "Raw…
+    $ Age              <dbl> 28.5, 43.5, 26.5, 19.5, 19.5, 30.5, 40.5, 21.5, 23.5,…
+    $ AgeClass         <chr> "24-34", "40-44", "24-34", "20-23", "20-23", "24-34",…
+    $ BirthYearClass   <chr> "24-39", "40-49", "24-39", "19-23", "19-23", "24-39",…
+    $ Division         <chr> "Open", "Open", "Open", "Juniors 17-21", "Juniors 17-…
+    $ BodyweightKg     <dbl> 67.3, 73.2, 60.6, 50.3, 63.7, 82.0, 79.3, 80.1, 88.0,…
+    $ WeightClassKg    <chr> NA, NA, NA, NA, NA, "82.5", "82.5", "82.5", "90", "90…
+    $ Squat1Kg         <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Squat2Kg         <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Squat3Kg         <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Squat4Kg         <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Best3SquatKg     <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Bench1Kg         <dbl> -40.0, 80.0, 40.0, 32.5, 40.0, 127.5, 150.0, 87.5, 16…
+    $ Bench2Kg         <dbl> -45.0, 85.0, 42.5, 35.0, 42.5, 132.5, 160.0, 95.0, 17…
+    $ Bench3Kg         <dbl> -45.0, 90.0, 45.0, -37.5, -45.0, NA, -167.5, -97.5, 1…
+    $ Bench4Kg         <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Best3BenchKg     <dbl> NA, 90.0, 45.0, 35.0, 42.5, 132.5, 160.0, 95.0, 177.5…
+    $ Deadlift1Kg      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Deadlift2Kg      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Deadlift3Kg      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Deadlift4Kg      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Best3DeadliftKg  <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ TotalKg          <dbl> NA, 90.0, 45.0, 35.0, 42.5, 132.5, 160.0, 95.0, 177.5…
+    $ Place            <chr> "DQ", "1", "2", "2", "1", "2", "1", "3", "1", "3", "D…
+    $ Dots             <dbl> NA, 88.80, 49.57, 43.67, 45.40, 90.07, 110.90, 65.46,…
+    $ Wilks            <dbl> NA, 86.89, 49.79, 44.76, 45.26, 89.09, 109.84, 64.81,…
+    $ Glossbrenner     <dbl> NA, 76.50, 43.98, 39.73, 39.96, 85.74, 105.88, 62.44,…
+    $ Goodlift         <dbl> NA, 70.06, 38.42, 34.55, 35.25, 66.97, 82.28, 48.60, …
+    $ Tested           <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Country          <chr> "Belarus", "Belarus", "Belarus", "Belarus", "Belarus"…
+    $ State            <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Federation       <chr> "GSF-Belarus", "GSF-Belarus", "GSF-Belarus", "GSF-Bel…
+    $ ParentFederation <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ Date             <date> 2019-06-22, 2019-06-22, 2019-06-22, 2019-06-22, 2019…
+    $ MeetCountry      <chr> "Belarus", "Belarus", "Belarus", "Belarus", "Belarus"…
+    $ MeetState        <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+    $ MeetTown         <chr> "Luninets", "Luninets", "Luninets", "Luninets", "Luni…
+    $ MeetName         <chr> "Bison Power Cup", "Bison Power Cup", "Bison Power Cu…
+    $ Sanctioned       <chr> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes…
+
+    # A tibble: 4,050,248 × 6
+       Name              Sex   Event Equipment   Age AgeClass
+       <chr>             <chr> <chr> <chr>     <dbl> <chr>   
+     1 E.S. Denisenko    F     B     Raw        28.5 24-34   
+     2 I.S. Lebetskaya   F     B     Raw        43.5 40-44   
+     3 K. Yakimovich     F     B     Raw        26.5 24-34   
+     4 A.G. Golneva      F     B     Raw        19.5 20-23   
+     5 E.V. Marunevskaya F     B     Raw        19.5 20-23   
+     6 D. Gimbitskiy     M     B     Raw        30.5 24-34   
+     7 S. Kozlov         M     B     Raw        40.5 40-44   
+     8 V.O. Shevchenko   M     B     Raw        21.5 20-23   
+     9 M.S. Drozdov      M     B     Raw        23.5 24-34   
+    10 Yu.G. Rimsha      M     B     Raw        35.5 35-39   
+    # ℹ 4,050,238 more rows
+
+This data set displays information about the athletes like their names,
+sex, and the event. It also displays aspects of their lifts like
+equipment age, age class, and division type plus their strength
+standards on compound lifts.
 
 ## 2.3: Investigated and rejected sources
 
-\[One or two sentences per rejected source: what it was, why you went
-looking. Some examples: licensing permissions, resolution mismatch,
-paywall, abandoned since 2017, aggregated beyond its usefulness, changed
-project idea, etc.
+I did not find any sources to deny / reject at the time of writing this
+code on November 7, 2026.
 
-A rejected source documented properly saves the next person the time you
-spent finding out the best source for your project. Negative results are
-not bad news!\]
+If a future source is rejected I will put the reason here \<—
 
 ## 2.4: What I could not find
 
-\[If you changed your project idea due to lack of data, explain what you
-expected to find more easily but does not, or exists and is not
-obtainable. Name who holds it, if you know the source. Absence is a
-finding about how an organization or community’s data is managed.\]
+I found all the information I needed for me to complete my project, all
+neatly organized in one csv file. Lucky me.
 
 ------------------------------------------------------------------------
 
@@ -130,50 +187,49 @@ finding about how an organization or community’s data is managed.\]
 
 | Source | Licence | Attribution_required | Attribution_given |
 |:---|:---|:---|:---|
-| \[source name 1\] | \[e.g. OGL Canada 2.0\] | Yes | Yes, see below |
-| \[source name 2\] | \[licence\] | \[Yes/No\] | \[Yes/No\] |
+| OpenPowerLifting.org | CC0 1,0 Universal | No | No |
 
-**Attribution statements.** \[Reproduce the exact attribution each
-licence requires, aka the wording the licence specifies.\]
+**Attribution statements.**
 
-## 3.2: Unresolved licensing \[If you were able to find all licencing, delete this\]
-
-\[For any source where you could not determine the licence include: what
-you tried, who you contacted or what you found, and what you concluded
-about permissible use based on the project. “Unknown, this is my search
-or web investigation trail” is worth full marks.\]
+- OpenPowerlifting: Because the OpenPowerlifting dataset is released
+  under a CC0 1.0 Universal (Public Domain Dedication), no specific
+  formal attribution wording is legally required by the license.
+  However, academic best practice is to credit the data source as: “Data
+  courtesy of OpenPowerlifting (openpowerlifting.org).
 
 ## 3.3: Downstream permissions
 
-\[What can someone else do with your data project *output*? If you
-combine sources under incompatible licences, your merged product may be
-more restricted than either input was. Work out what licence you can
-actually offer, and state it. If all open data, state it.\]
+The data set used is open-source through CC0. This final project output
+is fully open. Anyone is free to view, reuse, modify, distribute, or
+build upon this data project and its code without licences.
 
 ------------------------------------------------------------------------
 
 # 4: Consent and identifiability
 
-\[If your data does not describe people, say so explicitly and explain
-why you are confident of that then move on.\]
+**Consent.** This data provides the users with individual human
+powerlifter’s details such as names, sex, and age. The data is sourced
+from open athletic competition results that are public records. In order
+for these athletes to compete they must meet under federation rules that
+record key identifiers such as names, weights, performance statistics,
+and doping tests. For the purpose of this project names will not be used
+in any graph or collective.
 
-**Consent.** \[If you collected it: what paticipants agreed to, and how
-their data and consent was recorded. If someone else collected it: what
-were people told at the time, and does your use fall inside that? If it
-is your own data, what are you comfortable with people using it for in
-the future if someone else downloaded it?\]
+**Identifiability.** This data set is publicly recorded through athlete
+sport statistics and utilizes information like competition names, body
+weights, and strength numbers through power lifting competitions.
+Because these records are shared publicly, individual identification is
+based entirely on publicly available results from competitions. However,
+for this project names will not be used, but key characteristics of
+athletes will be analysed
 
-**Identifiability.** \[How many people are in the smallest reported
-cell? How small is the population of the place or community you are
-describing? If it does reference people’s data in a public manner
-(sports stats like goals or time), that is public data. If it is a
-conversation from a person who did not consent for their interview to be
-shared, it’s not.\]
-
-**What I will be doing with it.** \[Suppression of identifiable
-information in your published dataset, aggregation to a coarser unit
-(bigger groups etc), withholding identifying variables, or a decision
-not to publish part of the dataset.\]
+**How sensitive data will be used.** Although the OpenPowerLifting data
+set has names and competition data this project will be analyzing
+strength standards on a population level rather than an individual
+level. Names and specific athletes will **not** be singled out. all
+information found in this project will be used in figures such as
+summary tables, regression models, and graphs. This will ensure that no
+individual identity is highlighted.
 
 ------------------------------------------------------------------------
 
@@ -181,78 +237,84 @@ not to publish part of the dataset.\]
 
 ## 5.1: Excluded data from the audit
 
-\[Every published dataset will demonstrate what an author aimed to
+Every published dataset will demonstrate what an author aimed to
 prioritize, and lack of data or missing data can show the same. If you
 removed a column of the unprocessed dataset, describe what it was, and
 why you decided to remove it. That could be things like sensitive
 variables, time periods, places, categories. How could this exclusion
-affect your data points in your analysis? \]
+affect your data points in your analysis? **Once I start analyzing this
+data more I will look into data removal**
 
 ## 5.2: Who could be harmed
 
-\[Name a plausible misuse and who would be on the receiving end. Think
-about parties with an interest in the subject you chose, who are not
-your intended audience.\]
+Misuse of this data would include external companies that might affect
+individuals found in these competitions. Companies that revolve around
+insurance or employment. Misusing this data could result in false
+conclusions regarding physical wellness, workplace compatibility, or
+insurance rate adjustments.
 
 ## 5.3: Unreleased working data
 
-\[If there is anything in your working data you would not publish, say
-what it was and why. If there is nothing, describe why it is okay to
-publish the working / raw dataset.\]
+Due to this data set being public through CC0. It is entirely safe to
+publish my project. This project will be almost exclusively relying on
+Bodyweightkg, and Totalkg. There is no unreleased working data in this
+project that needs to be withheld.
 
 ------------------------------------------------------------------------
 
 # 6: Data Stewardship
 
-**Where it lives.** \[Repository, platform, or institution. It’s okay to
-be realisitic about the project after this course ends, as a GitHub
-account you stop paying attention to in January is a real answer.\]
+**Where it lives.** This project is hosted in a GitHub repository called
+“Final-Project-Zachery-Hermanson” which can be found in “DATA3101-2026”
 
-**Who maintains it.** \[If nobody, say nobody.\]
+**Who maintains it.** I (Zachery Hermanson) will be maintaning this data
+set until January 1st of 2027.
 
-**Formats and dependencies.** \[Will your files open in ten years?
-Consider what could break if someone tried it in 2036. The package
-versions, data format, API, links to sources etc.\]
+**Formats and dependencies.** The csv data may be updated and format
+changed. As long as script files don’t evolve or get replaced, this code
+should remain readable. Potential breakage could result from package
+updates and incompatibilities.
 
-**Lifespan.** \[How long is this meaningfully usable before it needs
-updating or should be retired?\]
+**Lifespan.** As a consistently updated data set, this should not be
+considered up to date unless the csv is consistently updated.
 
 ------------------------------------------------------------------------
 
 # 7: Use of AI
 
-\[State plainly whether you have used AI tools on this project.
+**As of November 7, 2026 I have no plans to use AI, this may change and
+if it does I will update this section.**
 
-Your `AI-LOG.md` will live in this repository and is committed alongside
-the work it describes. Do not reproduce it here, but use a link such as
-`/log/AI-LOG.md` to point to it within your final project directory:\]
+My `AI-LOG.md` will live in this repository and is committed alongside
+my work it describes.
 
-**AI log:** `AI-LOG.md` \[— maintained from \[starting date\] and
-committed alongside each stage of work.\]
+**AI log:** `AI-LOG.md` — November 7, 2026 and committed alongside each
+stage of work.
 
-\[One short paragraph summarizing your pattern of AI use (if any) so
-far: which stages, what for, etc. State the model you are using, such as
-ChatGPT or Claude. If you are continuing to chat to a Gemeni search
-agent after looking something up, that counts too! If you have not used
-AI tools at all, say so here and make sure `AI-LOG.md` says the same.\]
-
-\[**Reminder: the text in this document must be written in your own
-words.**\]
+Previously I would use AI for help during calorie counting and macro
+dialing. Mostly for diet related purposes to help fine tune
+caloric-deficits and caloric-surplus.
 
 ------------------------------------------------------------------------
 
 # 8: Session information
 
-    R version 4.6.1 (2026-06-24)
-    Platform: x86_64-apple-darwin20
-    Running under: macOS Tahoe 26.6.2
+``` r
+# provides information about what was used within the markdown session, allowing reproducibility after publishing.
+sessionInfo()
+```
+
+    R version 4.6.1 (2026-06-24 ucrt)
+    Platform: x86_64-w64-mingw32/x64
+    Running under: Windows 11 x64 (build 26300)
 
     Matrix products: default
-    BLAS:   /Library/Frameworks/R.framework/Versions/4.6-x86_64/Resources/lib/libRblas.0.dylib 
-    LAPACK: /Library/Frameworks/R.framework/Versions/4.6-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+      LAPACK version 3.12.1
 
     locale:
-    [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    [1] LC_COLLATE=English_Canada.utf8  LC_CTYPE=English_Canada.utf8   
+    [3] LC_MONETARY=English_Canada.utf8 LC_NUMERIC=C                   
+    [5] LC_TIME=English_Canada.utf8    
 
     time zone: America/Halifax
     tzcode source: internal
@@ -266,23 +328,14 @@ words.**\]
      [9] ggplot2_4.0.3   tidyverse_2.0.0
 
     loaded via a namespace (and not attached):
-     [1] gtable_0.3.6       jsonlite_2.0.0     compiler_4.6.1     tidyselect_1.2.1  
-     [5] scales_1.4.0       yaml_2.3.12        fastmap_1.2.0      R6_2.6.1          
-     [9] generics_0.1.4     knitr_1.52         pillar_1.11.1      RColorBrewer_1.1-3
-    [13] tzdb_0.5.0         rlang_1.3.0        stringi_1.8.9      xfun_0.60         
-    [17] S7_0.2.2           otel_0.2.0         timechange_0.4.0   cli_3.6.6         
-    [21] withr_3.0.3        magrittr_2.0.5     digest_0.6.39      grid_4.6.1        
-    [25] rstudioapi_0.19.0  hms_1.1.4          lifecycle_1.0.5    vctrs_0.7.3       
-    [29] evaluate_1.0.5     glue_1.8.1         farver_2.1.2       rmarkdown_2.32    
-    [33] tools_4.6.1        pkgconfig_2.0.3    htmltools_0.5.9   
-
-<!--
-BEFORE YOU SUBMIT
-&#10;- Does your file render from a clean session (wiping the environment and history with no errors?
-- Are all paths relative? No setwd(), no C:/Users/yourname/
-- Is every package you used declared in the setup chunk?
-- Is AI-LOG.md committed and current?
-- Could a stranger read this and know what you are hoping to do in your project, what your data is, where it came
-  from, and what others are allowed to do with it?
-- Have you deleted every bracketed prompt including this comment block?
--->
+     [1] bit_4.6.0          gtable_0.3.6       jsonlite_2.0.0     crayon_1.5.3      
+     [5] compiler_4.6.1     tidyselect_1.2.1   parallel_4.6.1     scales_1.4.0      
+     [9] yaml_2.3.12        fastmap_1.2.0      R6_2.6.1           generics_0.1.4    
+    [13] knitr_1.52         pillar_1.11.1      RColorBrewer_1.1-3 tzdb_0.5.0        
+    [17] rlang_1.3.0        utf8_1.2.6         stringi_1.8.9      xfun_0.60         
+    [21] S7_0.2.2           bit64_4.8.6        otel_0.2.0         timechange_0.4.0  
+    [25] cli_3.6.6          withr_3.0.3        magrittr_2.0.5     digest_0.6.39     
+    [29] grid_4.6.1         vroom_1.7.1        rstudioapi_0.19.0  hms_1.1.4         
+    [33] lifecycle_1.0.5    vctrs_0.7.3        evaluate_1.0.5     glue_1.8.1        
+    [37] farver_2.1.2       rmarkdown_2.32     tools_4.6.1        pkgconfig_2.0.3   
+    [41] htmltools_0.5.9   
