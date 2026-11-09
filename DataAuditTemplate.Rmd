@@ -45,7 +45,7 @@ This document will live in your final project folder in your repository alongsid
 
 # 1: Project Overview
 
-This project acts as window into the relationship between a powerlifter's bodyweight and their overall strength. Will a powerlifter's bodyweight be directly correlated with compound lifts (squat + deadlift + benchpress)? This project will focus on cleaning the data set, seperating genders, identifying age classes, weight classes, and graphing the information to see strength standard trends. 
+This project acts as a window into the relationship between a powerlifter's body weight and their overall strength. Is a powerlifter's body weight directly correlated with their compound lift strength (squat + bench press + deadlift)? This project will focus on cleaning the dataset, separating sexes, identifying age and weight classes, and graphing the information to visualize strength standard trends.
 
 -----
 
@@ -64,26 +64,26 @@ knitr::kable(sources)
 
 ## 2.2.1: Data Set Information & Fair Use
 
-**Producer and authority.** OpenPowerLifing.org hosts an open-source, non-profit collection of power lifting data. It is published as an open data-set to standardize global power lifting meet results into a single easy-to-use domain.
+**Producer and authority.** OpenPowerlifting.org hosts an open-source, non-profit collection of powerlifting data. It is published as an open dataset to standardize global powerlifting meet results into a single, easy-to-use domain.
 
-**Original Dataset Purpose.** The purpose of OpenPowerLifting.org is to preserve power lifting data taken from professional meets and to provide a comprehensive archive of athletic accomplishments. It is primarily utilized to track rankings and analyze sport trends among athletes.
+**Original Dataset Purpose.** The purpose of OpenPowerlifting.org is to preserve powerlifting data taken from professional meets and to provide a comprehensive archive of athletic accomplishments. It is primarily utilized to track rankings and analyze sports trends among athletes.
 
-**Collection method.** The values are gathered manually through official power lifting organizations using power lifting federation score sheets and score-reporting platforms. The data provided is analyzed and structured into a CSV file.
+**Collection method.** The values are gathered manually from official powerlifting organizations using powerlifting federation score sheets and score-reporting platforms. The provided data is analyzed and structured into a CSV file.
 
-**Coverage and resolution.** This data set is globally covered through multiple officially licenced power lifting federations. This data dates as far back as 1964 to today through continuous competition results.
+**Coverage and resolution.** This dataset features global coverage across multiple officially licensed powerlifting federations. The data spans from 1964 to the present through continuous competition results.
 
 **Licence.** Creative Commons Zero (CC0 1.0 Universal) Public Domain Dedication, allowing unrestricted use, modification, and distribution for any purpose.
 
-**Access.** Downloaded directly from OpenPowerLifting.org public git. Accessed through OpenPowerLifting.org/data.
+**Access.** Downloaded directly from the OpenPowerlifting.org public Git repository and accessed through OpenPowerlifting.org/data.
 
-**Known problems.** After a brief look through, some values are missing. Some figures that are required for my project appear to have a null value such as Best3SquatKg, Bench, and Deadlift. Some body weight is also missing.
+**Known problems.** After a brief review, some values are missing. Certain figures required for this project—such as Best3SquatKg, Best3BenchKg, and Best3DeadliftKg—contain null values. Some bodyweight entries are also missing. I may rectify this by providing specific graphs for individual lifts where available if athletes did not compete in all three compound lifts.
 
 ```{r source-1-load}
 raw_1 <- read_csv("C:/Users/zache/OneDrive/Documents/GitHubRepos/Final-Project/data/raw/openpowerlifting-2026-10-17-c7782562.csv") # example for a csv file
 glimpse(raw_1) |> select(1:6) 
 ```
 
-This data set displays information about the athletes like their names, sex, and the event. It also displays aspects of their lifts like equipment age, age class, and division type plus their strength standards on compound lifts.
+This dataset displays athlete information, such as names, sex, and events attended. It also details lifting parameters—including equipment used, age, division, and performance metrics across the compound lifts.
 
 ```{r source-2-load}
 
@@ -91,13 +91,11 @@ This data set displays information about the athletes like their names, sex, and
 
 ## 2.3: Investigated and rejected sources
 
-I did not find any sources to deny / reject at the time of writing this code on November 7, 2026.
-
-If a future source is rejected I will put the reason here <---
+I did not find any sources to deny or reject at the time of writing this code on November 7, 2026. If a future source is rejected, I will include the reason here: [Reason].
 
 ## 2.4: What I could not find
 
-I found all the information I needed for me to complete my project, all neatly organized in one csv file. Lucky me.
+I found all the information I needed to complete my project, all neatly organized in a single CSV file. Lucky me!
 
 ----
 
@@ -117,21 +115,20 @@ knitr::kable(licences)
 
 **Attribution statements.** 
 
-- OpenPowerlifting: Because the OpenPowerlifting dataset is released under a CC0 1.0 Universal (Public Domain Dedication), no specific formal attribution wording is legally required by the license. However, academic best practice is to credit the data source as: "Data courtesy of OpenPowerlifting (openpowerlifting.org).
+- **OpenPowerlifting**: Because the OpenPowerlifting dataset is released under a CC0 1.0 Universal (Public Domain Dedication), no specific formal attribution wording is legally required by the license. However, academic best practice is to credit the data source as: "Data courtesy of OpenPowerlifting (openpowerlifting.org)."
 
 ## 3.3: Downstream permissions
 
-The data set used is open-source through CC0. This final project output is fully open. Anyone is free to view, reuse, modify, distribute, or build upon this data project and its code without licences. 
-
+The dataset used is open-source under CC0. This final project output is fully open. Anyone is free to view, reuse, modify, distribute, or build upon this data project and its code without requiring licenses.
 ----
 
 # 4: Consent and identifiability
 
-**Consent.** This data provides the users with individual human powerlifter's details such as names, sex, and age. The data is sourced from open athletic competition results that are public records. In order for these athletes to compete they must meet under federation rules that record key identifiers such as names, weights, performance statistics, and doping tests. For the purpose of this project names will not be used in any graph or collective.
+**Consent.** This dataset provides users with individual powerlifters' details, such as names, sex, and age. The data is sourced from open athletic competition results that are part of the public record. In order for these athletes to compete, they must agree to federation rules that record key identifiers such as names, body weights, performance statistics, and doping tests. For the purpose of this project, individual names will not be used in any graph or aggregated analysis.
 
-**Identifiability.** This data set is publicly recorded through athlete sport statistics and utilizes information like competition names, body weights, and strength numbers through power lifting competitions. Because these records are shared publicly, individual identification is based entirely on publicly available results from competitions. However, for this project names will not be used, but key characteristics of athletes will be analysed
+**Identifiability.** This dataset utilizes publicly recorded athletic statistics, including competition names, body weights, and performance metrics from powerlifting competitions. Because these records are shared publicly, individual identification relies entirely on publicly available competition results. However, this project will not use names; it will analyze only the key physical and performance characteristics of athletes.
 
-**How sensitive data will be used.** Although the OpenPowerLifting data set has names and competition data this project will be analyzing strength standards on a population level rather than an individual level. Names and specific athletes will **not** be singled out. all information found in this project will be used in figures such as summary tables, regression models, and graphs. This will ensure that no individual identity is highlighted.
+**How sensitive data will be used.** Although the OpenPowerlifting dataset includes names and competition data, this project analyzes strength standards at a population level rather than an individual level. Names and specific athletes will not be singled out. All information used in this project will be presented in figures such as summary tables, regression models, and graphs, ensuring that no individual identity is highlighted.
 
 ---
 
@@ -139,27 +136,27 @@ The data set used is open-source through CC0. This final project output is fully
 
 ## 5.1: Excluded data from the audit
 
-Every published dataset will demonstrate what an author aimed to prioritize, and lack of data or missing data can show the same. If you removed a column of the unprocessed dataset, describe what it was, and why you decided to remove it. That could be things like sensitive variables, time periods, places, categories. How could this exclusion affect your data points in your analysis? **Once I start analyzing this data more I will look into data removal**
+Every published dataset demonstrates what an author aimed to prioritize, and missing or excluded data can reveal those same priorities. If you remove a column from the unprocessed dataset, describe what it was and why you decided to remove it (such as sensitive variables, specific time periods, locations, or categories). Consider how this exclusion could affect the data points in your analysis. [Note: Once I begin analyzing this data further, I will detail any specific data removals here.]
 
 ## 5.2: Who could be harmed
 
-Misuse of this data would include external companies that might affect individuals found in these competitions. Companies that revolve around insurance or employment. Misusing this data could result in false conclusions regarding physical wellness, workplace compatibility, or insurance rate adjustments. 
+Because this dataset is publicly available under CC0, it is entirely safe to publish this project. The analysis will rely almost exclusively on BodyweightKg and TotalKg. Consequently, there is no unreleased working data in this project that needs to be withheld.
 
 ## 5.3: Unreleased working data
 
-Due to this data set being public through CC0. It is entirely safe to publish my project. This project will be almost exclusively relying on Bodyweightkg, and Totalkg. There is no unreleased working data in this project that needs to be withheld.
+Because this dataset is publicly available under CC0, it is entirely safe to publish my project. This project will rely almost exclusively on BodyweightKg and TotalKg. There is no unreleased working data in this project that needs to be withheld.
 
 ---
 
 # 6: Data Stewardship
 
-**Where it lives.** This project is hosted in a GitHub repository called "Final-Project-Zachery-Hermanson" which can be found in "DATA3101-2026"
+**Where it lives.** This project is hosted in a GitHub repository named "Final-Project-Zachery-Hermanson", which can be found within "DATA3101-2026".
 
-**Who maintains it.** I (Zachery Hermanson) will be maintaning this data set until January 1st of 2027.
+**Who maintains it.** I (Zachery Hermanson) will be maintaining this dataset until January 1, 2027.
 
-**Formats and dependencies.** The csv data may be updated and format changed. As long as script files don't evolve or get replaced, this code should remain readable. Potential breakage could result from package updates and incompatibilities.
+**Formats and dependencies.** The CSV data may be updated, and its format may change over time. As long as script files are not altered or replaced, this code should remain functional and readable. Potential breakage could result from updates to external packages and version incompatibilities.
 
-**Lifespan.** As a consistently updated data set, this should not be considered up to date unless the csv is consistently updated.
+**Lifespan.** Because OpenPowerlifting is a continuously updated dataset, this repository's data should not be considered current unless the CSV file is up-to-date.
 
 -----
 

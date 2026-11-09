@@ -1,6 +1,6 @@
 # OpenPowerLifting Weight to Strength Correlation Audit
 Zachery James Hermanson
-2026-11-07
+2026-11-09
 
 - [1: Project Overview](#1-project-overview)
 - [2: Data Sources](#2-data-sources)
