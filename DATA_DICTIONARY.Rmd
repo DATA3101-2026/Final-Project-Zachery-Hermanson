@@ -1,0 +1,86 @@
+---
+title: "DATA DICTIONARY"
+output: html_document
+date: "2026-11-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+<style>
+.main-container {
+  max-width: 1200px;
+}
+table {
+  font-size: 0.92em;
+  line-height: 1.45;
+}
+th, td {
+  padding: 8px 12px !important;
+  vertical-align: top;
+}
+td:first-child {
+  font-family: monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+body, h1, h2, h3 {
+  font-family: "Calibri Light", Calibri, "Segoe UI", sans-serif;
+  font-weight: 300;
+}
+div.data-dict {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+div.data-dict table {
+  width: 100%;
+  font-size: 0.95em;
+  line-height: 1.45;
+}
+div.data-dict th {
+  font-family: Calibri, "Segoe UI", sans-serif;
+  font-weight: 600;
+}
+div.data-dict th,
+div.data-dict td {
+  padding: 8px 12px;
+  vertical-align: top;
+}
+div.data-dict tbody td:first-child {
+  font-family: Consolas, "Courier New", monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+</style>
+
+<div class="data-dict">
+
+| Variable | Description | Type | Units | Permitted Values | Missing Values | Source |
+| :--- | :--- | :---: | :---: | :--- | :--- | :---: |
+| Sex | The gender of the lifter | Character | N/A | M, F, Mx | None | OpenPowerlifting.org |
+| Event | Contest type for each entry | Character | N/A | SBD, B, D, S, BD, SB, SD | None | OpenPowerlifting.org |
+| Equipment | Equipment used to assist with lifts | Character | N/A | Raw, Wraps, Single-ply, Multi-ply, Unlimited, Straps | None | OpenPowerlifting.org |
+| Tested | Indicates whether an athlete was drug tested | Character | N/A | Yes, or "" (No) | Missing data represents a lack of testing | OpenPowerlifting.org |
+| Age | Lifter age at competition date | Numeric | Years | 0–100+ (.5 for estimated ages) | N/A when birthdays are missing | OpenPowerlifting.org |
+| BodyweightLbs | Recorded body mass in pounds (lbs) | Numeric | Pounds (lbs) | > 0 | N/A when weigh-in was unrecorded | OpenPowerlifting.org |
+| Squat1Lbs | First squat attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Squat2Lbs | Second squat attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Squat3Lbs | Third squat attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Best3SquatLbs | Highest successful attempt in squat | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Bench1Lbs | First bench attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Bench2Lbs | Second bench attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Bench3Lbs | Third bench attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Best3BenchLbs | Highest successful attempt in bench | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Deadlift1Lbs | First deadlift attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Deadlift2Lbs | Second deadlift attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Deadlift3Lbs | Third deadlift attempt weight | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Best3DeadliftLbs | Highest successful attempt in deadlift | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| TotalLbs | Sum of all successful lifts together | Numeric | Pounds (lbs) | > 0 | N/A for no attempt | OpenPowerlifting.org |
+| Dots | Bodyweight-normalized strength score | Numeric | Points | > 0 | N/A for missing bodyweight / total lbs | OpenPowerlifting.org |
+| Wilks | Legacy bodyweight-normalized strength coefficient | Numeric | Points | > 0 | N/A for missing bodyweight / total lbs | OpenPowerlifting.org |
+| Date | Starting date of competition | Date | YYYY-MM-DD | Calendar dates | None | OpenPowerlifting.org |
+| Country | Home country of lifter | Character | N/A | Country names (Canada, USA, etc.) | N/A when unrecorded | OpenPowerlifting.org |
+| State | Home state, province, or territory of lifter | Character | N/A | State/province (ON, NB, CA) | N/A when unrecorded | OpenPowerlifting.org |
+</div>
+

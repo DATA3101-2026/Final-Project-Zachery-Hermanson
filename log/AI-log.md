@@ -11,4 +11,5 @@ problems if using LLMs.
 
 | Date | Stage | Tool | What I asked | What I did with it |
 |------|-------|------|--------------|--------------------|
-|      |       |      |              |                    |
+| 2026-11-24 | Part 3 | N/A | No AI Used | No AI used |
+| 2026-11-25 | Part 3 | ChatGPT | "How do I make my data description not look boring?" | Used Code give to me in CSS / HTML to customize my Data Dictionary to not look so hard on the eyes / plain |
